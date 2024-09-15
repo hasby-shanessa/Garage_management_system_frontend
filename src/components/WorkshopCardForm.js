@@ -1,5 +1,8 @@
 import { defaultConfig } from "next/dist/server/config-shared";
 import { useState } from "react";
+import '../app/globals.css';
+ // Correct the path based on your actual structure
+import Link from 'next/link';
 
 export default function WorkshopCardForm(){
     const [plateNumber, setPlateNumber] = useState('');
@@ -58,11 +61,14 @@ export default function WorkshopCardForm(){
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-      <h1>Register a New Car</h1>
+    <div className="border-[#151953] shadow-inner">
+    <h1 className="capitalize text-3xl font-bold mb-4 text-center pt-4 text-bg">Garage management system</h1>
+    <div style={{ padding: '45px', maxWidth: '600px', margin: ' auto', background: "#e1e2e9"}} className="rounded shadow-inner">
+        
+      <h1 className="mb-6 text-xl text-black font-bold">Register a New Car</h1>
       <form onSubmit={handleSubmit}>
         {/* Plate Number Input */}
-        <div style={{ marginBottom: '10px' }}>
+        <div style={{ marginBottom: '10px', color: "black" }} className="text-sm p-2">
           <label htmlFor="plateNumber">Plate Number:</label>
           <input
             type="text"
@@ -70,12 +76,12 @@ export default function WorkshopCardForm(){
             value={plateNumber}
             onChange={(e) => setPlateNumber(e.target.value)} // Update state with user input
             required // Make this field mandatory
-            style={{ width: '100%', padding: '8px' }}
+            style={{ width: '100%', padding: '8px', outline: 'none' }} className="rounded-md focus:border-2 border-gray-200 focus:border-peri"
             />
             </div>
     
             {/* Driver's Name Input */}
-            <div style={{ marginBottom: '10px' }}>
+            <div style={{ marginBottom: '10px', color: "black" }} className="text-sm p-2">
               <label htmlFor="driver">Driver's Name:</label>
               <input
                 type="text"
@@ -83,12 +89,12 @@ export default function WorkshopCardForm(){
                 value={driver}
                 onChange={(e) => setdriver(e.target.value)} // Update state with user input
                 required // Make this field mandatory
-                style={{ width: '100%', padding: '8px' }}
+                style={{ width: '100%', padding: '8px', outline: 'none' }} className="rounded-md focus:border-2 border-gray-200 focus:border-peri"
               />
             </div>
 
             {/* Location Input */}
-            <div style={{ marginBottom: '10px' }}>
+            <div style={{ marginBottom: '10px', color: "black" }} className="text-sm p-2">
               <label htmlFor="location">Location:</label>
               <input
                 type="text"
@@ -96,12 +102,12 @@ export default function WorkshopCardForm(){
                 value={location}
                 onChange={(e) => setlocation(e.target.value)} // Update state with user input
                 required // Make this field mandatory
-                style={{ width: '100%', padding: '8px' }}
+                style={{ width: '100%', padding: '8px', outline: 'none' }} className="rounded-md focus:border-2 border-gray-200 focus:border-peri"
               />
             </div>
 
             {/* Entry Date Input */}
-        <div style={{ marginBottom: '10px' }}>
+        <div style={{ marginBottom: '10px', color: "black" }} className="text-sm p-2">
           <label htmlFor="entryDate">Entry Date:</label>
           <input
             type="date"
@@ -109,12 +115,12 @@ export default function WorkshopCardForm(){
             value={entryDate}
             onChange={(e) => setEntryDate(e.target.value)} // Update state with user input
             required // Make this field mandatory
-            style={{ width: '100%', padding: '8px' }}
+            style={{ width: '100%', padding: '8px' , outline: 'none' }} className="rounded-md focus:border-2 border-gray-200 focus:border-peri"
           />
         </div>
 
         {/* Mechanical Issue Textarea */}
-        <div style={{ marginBottom: '10px' }}>
+        <div style={{ marginBottom: '10px', color:"black" }} className="text-sm p-2">
           <label htmlFor="mechanicalIssue">Mechanical Issue:</label>
           <textarea
             id="mechanicalIssue"
@@ -122,18 +128,27 @@ export default function WorkshopCardForm(){
             onChange={(e) => setMechanicalIssue(e.target.value)} // Update state with user input
             required // Make this field mandatory
             rows="4" // Set the number of visible rows
-            style={{ width: '100%', padding: '8px' }}
+            style={{ width: '100%', padding: '8px', outline: 'none' }} className="rounded-md focus:border-2 border-gray-200 focus:border-peri"
           ></textarea>
         </div>
 
         {/* Submit Button */}
+        <div className="flex justify-end">
         <button
           type="submit"
-          style={{ padding: '10px 20px', backgroundColor: '#0070f3', color: '#fff', border: 'none', borderRadius: '4px' }}
+          style={{ padding: '8px 20px'}} className=" border border-peri text-[#151953] rounded hover:bg-peri hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           Submit
         </button>
+        </div>
       </form>
+    </div> 
+    <div className="flex justify-center p-4">
+    <Link href="/cards" style={{ color: '#0070f3' }} >
+        <button className="px-4 py-2 bg-[#3E448E] text-white rounded hover:bg-[#25295D] place-content-center shadow-inner">View Workshop Cards</button>
+        </Link>
+        </div>
     </div>
   );
 }
+  

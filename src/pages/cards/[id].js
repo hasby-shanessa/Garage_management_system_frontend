@@ -35,14 +35,14 @@
 //     <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
 //       <h1 style={{color:'#151953'}} className='text-3xl font-bold'>Workshop Card Details</h1>
 //       <div
-//         style={{
-//           border: '1px solid #ddd',
-//           borderRadius: '8px',
-//           padding: '15px',
-//           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-//           textDecoration: 'none',
-//           background: '#e1e2e9'
-//         }}
+        // style={{
+        //   border: '1px solid #ddd',
+        //   borderRadius: '8px',
+        //   padding: '15px',
+        //   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        //   textDecoration: 'none',
+        //   background: '#e1e2e9'
+        // }}
 //       >
 //         <h2>{card.plateNumber}</h2>
 //         <p><strong>Driver:</strong> {card.driver}</p>
@@ -96,9 +96,9 @@ const CardDetails = ({ initialCardData }) => {
 
   if (isLoading) {
     return (
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Loading...</h1>
+      <div className="container">
+        <div className="content">
+          <h1 className="title">Loading...</h1>
         </div>
       </div>
     );

@@ -1,8 +1,11 @@
+// "use client";
 import { defaultConfig } from "next/dist/server/config-shared";
 import { useState } from "react";
 import '../app/globals.css';
  // Correct the path based on your actual structure
 import Link from 'next/link';
+import { useRouter, useEffect } from "next/router";  // For navigation
+
 
 export default function WorkshopCardForm(){
     const [plateNumber, setPlateNumber] = useState('');
@@ -11,38 +14,105 @@ export default function WorkshopCardForm(){
     const [entryDate, setEntryDate] = useState('');
     const [mechanicalIssue, setMechanicalIssue] = useState('');
     // const [status, setStatus] = useState('');
+    const router = useRouter();
+    const { id } = router.query;  // Extract the card ID from the URL
+
+
+    // changes
+
+
+    // If editing, fetch the existing card data
+  //   useEffect(() => {
+  //     if (id) {
+  //         const fetchCard = async () => {
+  //             const response = await fetch(`http://localhost:5000/api/workshop-cards/${id}`);
+  //             const data = await response.json();
+
+  //             // Pre-fill form with existing card data for editing
+  //             setPlateNumber(data.plateNumber);
+  //             setDriver(data.driver);
+  //             setLocation(data.location);
+  //             setEntryDate(data.entryDate);
+  //             setMechanicalIssue(data.mechanicalIssue);
+  //             setStatus(data.status);  // Keep the status as it is
+  //         };
+  //         fetchCard();
+  //     }
+  // }, [id]);
     
 
     //Function for handling form submission
 
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent the default form submission behavior
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault(); // Prevent the default form submission behavior
 
-        const response = await fetch('http://localhost:5000/api/workshop-cards', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                plateNumber,
-                driver,
-                location,
-                entryDate,
-                mechanicalIssue,
-                status: "created", // Include status if applicable
-              }),
-            });
-            if (response.ok) {
-                // Clear the form fields
-                setPlateNumber('');
-                setdriver('');
-                setlocation('');
-                setEntryDate('');
-                setMechanicalIssue('');
-                alert('Card successfully created!');
-              } else {
-                alert('Failed to create card');
-              }
+        
+    //     const method = id ? 'PUT' : 'POST';  // If ID exists, use PUT for editing, otherwise POST for creating
+    //     const url = id 
+    //         ? `http://localhost:5000/api/workshop-cards/${id}` 
+    //         : 'http://localhost:5000/api/workshop-cards';
+
+    //     // Create or update the card based on whether ID exists
+    //     const response = await fetch(url, {
+    //         method,
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             plateNumber,
+    //             driver,
+    //             location,
+    //             entryDate,
+    //             mechanicalIssue,
+    //             status: "created",  // Default status for new cards is "created"
+    //         }),
+    //     });
+
+    //     if (response.ok) {
+    //         setSuccessMessage(id ? 'Card successfully updated!' : 'Card successfully created!');
+    //         if (!id) {
+    //             // For new card creation, reset the form
+    //             resetForm();
+    //         } else {
+    //             // For edit, redirect back to the cards list
+    //             router.push('/cards');
+    //         }
+    //     } else {
+    //         alert('Failed to submit card');
+    //     }
+    // };
+
+
+    const handleSubmit = async (e) => {
+      e.preventDefault(); // Prevent the default form submission behavior
+
+      const response = await fetch('http://localhost:5000/api/workshop-cards', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              plateNumber,
+              driver,
+              location,
+              entryDate,
+              mechanicalIssue,
+              status: "created", // Include status if applicable
+            }),
+          });
+          if (response.ok) {
+              // Clear the form fields
+              setPlateNumber('');
+              setdriver('');
+              setlocation('');
+              setEntryDate('');
+              setMechanicalIssue('');
+              alert('Card successfully created!');
+            } else {
+              alert('Failed to create card');
+            }
+
+          };   
 
 
          // Log the form data to the console (or send it to a backend)
@@ -58,7 +128,7 @@ export default function WorkshopCardForm(){
     // setdriver('');
     // setEntryDate('');
     // setMechanicalIssue('');
-  };
+  // };
 
   return (
     <div className="border-[#151953] shadow-inner">
@@ -138,7 +208,8 @@ export default function WorkshopCardForm(){
           type="submit"
           style={{ padding: '8px 20px'}} className=" border border-peri text-[#151953] rounded hover:bg-peri hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
-          Submit
+          Submit  
+          {/* {id ? 'Update' : 'Submit'} */}
         </button>
         </div>
       </form>

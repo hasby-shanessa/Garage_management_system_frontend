@@ -144,7 +144,12 @@ export default function WorkshopCardForm(){
             type="text"
             id="plateNumber"
             value={plateNumber}
-            onChange={(e) => setPlateNumber(e.target.value)} // Update state with user input
+            // onChange={(e) => setPlateNumber(e.target.value)} // Update state with user input
+            onChange={(e) => {
+              if (e.target.value.length <= 8) { // Limit plate number to 8 characters
+                setPlateNumber(e.target.value);
+              }
+            }}
             required // Make this field mandatory
             style={{ width: '100%', padding: '8px', outline: 'none' }} className="rounded-md focus:border-2 border-gray-200 focus:border-peri"
             />
@@ -183,7 +188,17 @@ export default function WorkshopCardForm(){
             type="date"
             id="entryDate"
             value={entryDate}
-            onChange={(e) => setEntryDate(e.target.value)} // Update state with user input
+            // onChange={(e) => setEntryDate(e.target.value)} // Update state with user input
+            onChange={(e) => {
+              const selectedDate = new Date(e.target.value);
+              const today = new Date();
+              
+              if (selectedDate <= today) { // Ensure entry date is not after today
+                setEntryDate(e.target.value);
+              } else {
+                alert("Entry date cannot be in the future");
+              }
+            }}
             required // Make this field mandatory
             style={{ width: '100%', padding: '8px' , outline: 'none' }} className="rounded-md focus:border-2 border-gray-200 focus:border-peri"
           />
